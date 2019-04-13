@@ -1,1 +1,3 @@
-console.log(11);
+require('./index.scss');
+
+alert(1);
