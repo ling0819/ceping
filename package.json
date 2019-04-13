@@ -1,0 +1,34 @@
+{
+  "name": "ceping",
+  "version": "1.0.0",
+  "description": "Vocational Assessment System",
+  "main": "index.js",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compress": "^3.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxyling/ceping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zxyling/ceping/issues"
+  },
+  "homepage": "https://github.com/zxyling/ceping#readme"
+}
