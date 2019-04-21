@@ -1,1 +1,9 @@
-body{background:#00f}body div{height:100px;width:100px;border:2px solid #ccc;-webkit-transform:rotate(45deg);transform:rotate(45deg)}
+body {
+  background: blue; }
+  body div {
+    height: 100px;
+    width: 100px;
+    border: 2px solid #cccccc;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg); }
+

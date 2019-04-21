@@ -1,15 +1,15 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');  //html模板插件
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');  
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');         //html模板插件
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');  // 抽离css
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");        // js资源处理
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");  // css压缩
 
 
 module.exports = {
-    mode: 'production',  // 模式有两种 production development
-    optimization: {
+    mode: 'development',  // 模式有两种 production development  开发环境不会走优化项
+    optimization: {      // 优化项 webpack4提供
         minimizer: [
-            new UglifyJsPlugin({
+            new UglifyJsPlugin({    //压缩js资源
                 cache: true,//启动缓存
                 parallel: true,//启动并行压缩
                 //如果为true的话，可以获得sourcemap
@@ -46,12 +46,36 @@ module.exports = {
     ],
     module: { // 模块  loader特点职责单一 可以组合使用  默认从右向左执行 loader还可以写成对象方式 从下到上执行
         rules: [
+            // {
+            //     test: /\.js$/,
+            //     use: {
+            //         loader: 'eslint'
+            //     }
+            // },
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {   //用babel-loader把es6转为es5
+                        presets: [
+                            '@babel/preset-env'
+                        ],
+                        plugins: [
+                            ['@babel/plugin-proposal-decorators', {"legacy": true}],  // 解析class
+                            ['@babel/plugin-proposal-class-properties', {"loose": true}], //解析装饰器
+                            '@babel/plugin-transform-runtime'
+                        ]
+                    }
+                },
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/
+            },
             {
                 test: /\.css$/, 
                 use: [
                     MiniCssExtractPlugin.loader,    //通过link标签插入，而不是直接写入
-                    'css-loader',
-                    'postcss-loader'
+                    'css-loader',                   // 解析@import
+                    'postcss-loader'                // 自动加浏览器前缀
                 ]
             },
             {
